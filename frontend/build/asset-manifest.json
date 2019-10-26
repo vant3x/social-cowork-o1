@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/static/css/main.ff775faa.chunk.css",
+    "main.js": "/static/js/main.61cc0eb2.chunk.js",
+    "main.js.map": "/static/js/main.61cc0eb2.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.fb8b09d4.js",
+    "runtime-main.js.map": "/static/js/runtime-main.fb8b09d4.js.map",
+    "static/js/2.1629a485.chunk.js": "/static/js/2.1629a485.chunk.js",
+    "static/js/2.1629a485.chunk.js.map": "/static/js/2.1629a485.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.b094d42a08f8d6ce25fd5cf6db2fcc95.js": "/precache-manifest.b094d42a08f8d6ce25fd5cf6db2fcc95.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.ff775faa.chunk.css.map": "/static/css/main.ff775faa.chunk.css.map",
+    "static/media/sb-admin-2.css": "/static/media/fondo3.41bc983c.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.fb8b09d4.js",
+    "static/js/2.1629a485.chunk.js",
+    "static/css/main.ff775faa.chunk.css",
+    "static/js/main.61cc0eb2.chunk.js"
+  ]
+}
