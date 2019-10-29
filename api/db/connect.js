@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 
-const sequelize = new Sequelize('prueba-ong-sql','root','', {
+const sequelize = new Sequelize('prueba-ong-sql', 'root', '', {
     host: 'localhost',
     dialect: 'mysql',
     port: '3306',
@@ -15,6 +15,6 @@ const sequelize = new Sequelize('prueba-ong-sql','root','', {
         idle: 10000
     },
     logging: false
-}); 
+});
 
 module.exports = sequelize;
