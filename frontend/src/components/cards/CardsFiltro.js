@@ -9,6 +9,7 @@ function CardsFiltro() {
     const [propiedades, guardarPropiedades] = useState([]);
 
     const fetchAPI = async () => {
+        
         const propiedadesData = await axiosFetch.get('/propiedades');
 
         setTimeout(() => {
@@ -29,12 +30,12 @@ function CardsFiltro() {
                 <div className="album py-3 ">
                     <div className="container">
                     <div className="row">
-                {propiedades.map(propiedad => (
-                        <CardFiltroDetalle 
-                        key={propiedad.id_propiedades}
-                            propiedad={propiedad}
-                        />
-                ))}
+                        {propiedades.map(propiedad => (
+                                <CardFiltroDetalle 
+                                    key={propiedad.id_propiedades}
+                                    propiedad={propiedad}
+                                />
+                        ))}
                         </div>
                     </div>
                 </div>

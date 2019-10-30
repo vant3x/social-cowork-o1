@@ -27,7 +27,7 @@ document.getElementById('redirect').click()
       <div className="card o-hidden border-0 shadow-lg my-5">
         <div className="card-body p-0">
        
-
+    
           <div className="row">
             <div className="col-lg-6 d-none d-lg-block bg-login-image"></div>
             <div className="col-lg-6">
@@ -38,7 +38,7 @@ document.getElementById('redirect').click()
                 <form className="user">
                   <div className="form-group">
                     <input type="email" className="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Email" />
-                  </div>
+                  </div>  
                   <div className="form-group">
                     <input type="password" className="form-control form-control-user" id="exampleInputPassword" placeholder="Password"/>
                   </div>

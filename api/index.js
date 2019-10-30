@@ -10,7 +10,7 @@ const flash = require('connect-flash')
 const passport = require('./auth/passport');
 const app = express();
 // require db
-const db = require('./db/connect');
+const db = require('./db/connect-prod');
 
 // modelos
 require('./models/Roles');
