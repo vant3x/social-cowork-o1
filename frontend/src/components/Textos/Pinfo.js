@@ -1,8 +1,20 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
+
+import axiosFetch from '../../config/axiosConfig';
+import { withRouter } from 'react-router-dom';
 
 
+function Pinfo(props) {
 
-function Pinfo() {
+    const [propiedad, guardarPropiedad] = useState([]);
+    const fetchAPI = async () => {
+        const propiedad = await axiosFetch.get(`/propiedades/${props.match.params.id}`);
+        guardarPropiedad(propiedad.data);
+    }
+    useEffect(() => {
+        fetchAPI();
+    }, [propiedad]);
+
 
     const Centrado = { textAlign: 'center' };
     const Color = { color: 'black' }
@@ -13,16 +25,15 @@ function Pinfo() {
             <div class="container">
                 <div class="row">
                     <div class="col mt-4">
-                        <h2 style={Centrado}>Oficina
-</h2>
+                     <h2 style={Centrado}>{propiedad.titulo}</h2>
+
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6 mt-4">
                         <h4>Descripcion</h4>
                         <h7>
-                        Una gran oficina con sofas y mesas, muy buena iluminación y conexión veloz a internet
-
+                        {propiedad.descripcion}
 
           </h7>
                     </div>
@@ -88,4 +99,4 @@ function Pinfo() {
     )
 }
 
-export default Pinfo;
+export default withRouter(Pinfo);

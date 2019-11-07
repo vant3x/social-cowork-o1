@@ -19,14 +19,16 @@ function CardFiltroDetalle(props) {
                     <strong>Precio: ${props.propiedad.precio}.000</strong>
                     <div className="d-flex justify-content-between align-items-center">
                       <div className="btn-group">
+                      <Link to={`/propiedad/${props.propiedad.id_propiedades}`}>
+
                         <button
                           type="button"
                           className="btn btn-sm btn-outline-secondary"
                         >
-                            <Link to={"/Propiedadesinfo"}>
                               Ver
-                            </Link>
                         </button>
+                        </Link>
+
                       </div>
                       <small className="text-muted">
                         <font style={NuncaExpandirse}>
