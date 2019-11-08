@@ -1,7 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
-const path =  require('path');
+const path = require('path');
 const routes = require('./routes/index');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
@@ -10,7 +10,7 @@ const flash = require('connect-flash')
 const passport = require('./auth/passport');
 const app = express();
 // require db
-const db = require('./db/connect-prod');
+const db = require('./db/connect');
 
 // modelos
 require('./models/Roles');
@@ -26,7 +26,7 @@ db.sync()
     .catch(error => console.log(error));
 
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 
 app.set('port', 5000 || process.env.PORT);
 
@@ -52,7 +52,7 @@ app.use((req, res, next) => {
 });
 
 /// rutas
-app.use('/',routes);
+app.use('/', routes);
 
 app.use(express.static('./uploads'));
 
