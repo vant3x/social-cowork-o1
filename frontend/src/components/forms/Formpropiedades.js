@@ -4,7 +4,7 @@ import axiosFetch from "../../config/axiosConfig";
 
 import "./form.css";
 
-function Formpropiedades({ history }) {
+function Formpropiedades(props) {
   const [tipoPropiedades, guardarTipoPropiedades] = useState([]);
 
   const fetchAPI = async () => {
@@ -34,17 +34,61 @@ function Formpropiedades({ history }) {
     habitaciones: "",
     tipoPropiedadId: ""
   });
+  //Guardar imagen
+  const [archivo, guardarArchivo] = useState("");
 
-  //leer los datos del formulario
-
+  // leer data form
   const actualizarState = e => {
-    //almacenar lo que el usuario escribe en el state
     guardarPropiedad({
-      //copia estado actual
+      // obtener una copia del state
       ...propiedad,
       [e.target.name]: e.target.value
     });
     console.log(propiedad);
+  };
+  // colocar la imagen en el state
+  const leerArchivo = e => {
+    guardarArchivo(e.target.files[0]);
+  };
+
+  const agregarPropiedadApi = async e => {
+    e.preventDefault();
+
+    //Crear un formdata
+    const formData = new FormData();
+    formData.append("titulo", "propiedad.titulo");
+    formData.append("descripcion", "propiedad.descripcion");
+    formData.append("precio", "propiedad.precio");
+    formData.append("sector", "propiedad.sector");
+    formData.append("direccion", "propiedad.direccion");
+    formData.append("area", "propiedad.area");
+    formData.append("banios", "propiedad.banios");
+    formData.append("img1", archivo);
+    formData.append("habitaciones", "propiedad.habitaciones");
+    formData.append("tipoPropiedadId", "propiedad.tipoPropiedadId");
+
+    //Añade una nueva propiedad en la REST API
+    try {
+      const res = await axiosFetch.post("/nueva-propiedad", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      });
+
+      if (res.status === 200) {
+        Swal.fire("Propiedad agregada", res.data.mensaje, "success");
+      }
+
+      // redireccionar
+      props.history.push("/PropiedadesFiltro");
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        type: "error",
+        title: "Hubo un error",
+        text: "Vuelva a intentarlo, la propiedad no se agregó"
+      });
+    }
   };
 
   const validarPropiedad = () => {
@@ -79,31 +123,6 @@ function Formpropiedades({ history }) {
     return valido;
   };
 
-  //aññade una nueva propiedad en la REST API
-
-  const agregarPropiedadApi = e => {
-    e.preventDefault();
-    //alejoooooo
-    axiosFetch
-      .post("/nueva-propiedad", propiedad)
-
-      .then(res => {
-        //validar si hay errores
-
-        console.log("Error de duplicado en DB");
-        Swal.fire({
-          type: "error",
-          tittle: "hubo un error ",
-          text: "la propiedad ya esta registrada "
-        }).catch(() => {
-          console.log(res);
-          Swal.fire("se agrego la propiedad", `${res.data.mensaje}`, "success");
-        });
-        //redireccionar
-        history.push("/");
-      });
-  };
-
   const ancho = { width: "500px" };
 
   return (
@@ -114,11 +133,13 @@ function Formpropiedades({ history }) {
             <div className="col">
               <form className="mt-3" onSubmit={agregarPropiedadApi}>
                 <h2>Registra tu inmueble</h2>
+                <legend>Todos los campos son requeridos*</legend>
                 <hr />
                 <div className="form-group">
                   <label for="precio">Título</label>
                   <input
                     type="text"
+                    required
                     className="form-control"
                     placeholder="Nombra el inmueble"
                     name="titulo"
@@ -131,6 +152,7 @@ function Formpropiedades({ history }) {
                     <label for="banios">Tipo</label>
                     <select
                       name="tipoPropiedadId"
+                      required
                       id="titulo"
                       className="custom-select mb-3"
                       onChange={actualizarState}
@@ -149,6 +171,7 @@ function Formpropiedades({ history }) {
                   <label for="precio">Precio</label>
                   <input
                     type="text"
+                    required
                     className="form-control"
                     placeholder="Indicanos el valor de alquiler del inmueble"
                     name="precio"
@@ -171,6 +194,7 @@ function Formpropiedades({ history }) {
                   <label for="direccion">Dirección</label>
                   <input
                     type="text"
+                    required
                     className="form-control"
                     placeholder="Dirección"
                     name="direccion"
@@ -182,6 +206,7 @@ function Formpropiedades({ history }) {
                   <label for="area">Área</label>
                   <input
                     type="text"
+                    required
                     className="form-control"
                     placeholder="Indicanos el área en metros cuadrados"
                     name="area"
@@ -195,6 +220,7 @@ function Formpropiedades({ history }) {
                     <label for="banios">Baños</label>
                     <input
                       type="text"
+                      required
                       className="form-control"
                       placeholder="número de baños"
                       name="banios"
@@ -206,22 +232,23 @@ function Formpropiedades({ history }) {
                 <div className="form-group">
                   <label for="img_principal">Imagen principal</label>
                   <input
-                    type="text"
+                    type="file"
+                    required
                     className="form-control"
                     placeholder="Sube la imagen principal"
                     name="img1"
                     id="img_principal"
-                    onChange={actualizarState}
+                    onChange={leerArchivo}
                   />
                   <div className="form-group">
                     <label for="img_sec">Imagen dos</label>
                     <input
-                      type="text"
+                      type="file"
                       className="form-control"
                       placeholder="Sube otra imagen"
                       name="img2"
                       id="img_sec"
-                      onChange={actualizarState}
+                      onChange={leerArchivo}
                     />
                   </div>
                   <div className="row">
