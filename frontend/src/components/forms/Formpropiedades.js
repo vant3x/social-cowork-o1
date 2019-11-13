@@ -54,26 +54,8 @@ function Formpropiedades(props) {
   const agregarPropiedadApi = async e => {
     e.preventDefault();
 
-    //Crear un formdata
-    const formData = new FormData();
-    formData.append("titulo", "propiedad.titulo");
-    formData.append("descripcion", "propiedad.descripcion");
-    formData.append("precio", "propiedad.precio");
-    formData.append("sector", "propiedad.sector");
-    formData.append("direccion", "propiedad.direccion");
-    formData.append("area", "propiedad.area");
-    formData.append("banios", "propiedad.banios");
-    formData.append("img1", archivo);
-    formData.append("habitaciones", "propiedad.habitaciones");
-    formData.append("tipoPropiedadId", "propiedad.tipoPropiedadId");
-
-    //Añade una nueva propiedad en la REST API
     try {
-      const res = await axiosFetch.post("/nueva-propiedad", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data"
-        }
-      });
+      const res = await axiosFetch.post("/nueva-propiedad", propiedad, {});
 
       if (res.status === 200) {
         Swal.fire("Propiedad agregada", res.data.mensaje, "success");
