@@ -90,7 +90,8 @@ class Nav extends React.Component {
                                             </li>
                                         </ul>
                                         <form className="form-inline  my-md-0 ">
-                                            <input className="form-control form-control-sm" type="text" placeholder="Buscar" aria-label="Buscar" />
+                                            <input className="form-control form-control-sm"
+                                                name="titulo" type="text" placeholder="Buscar" aria-label="Buscar" />
                                         </form>
                                     </div>
                                 </nav>

@@ -10,31 +10,32 @@ exports.msgAuth = (req, res, next) => {
     next();
 }
     
-
-exports.autenticarUsuario =  passport.authenticate('local', {
-        successRedirect: '/',
-        failureRedirect: '/iniciar-sesion',
-        failureFlash: true
+exports.autenticarUsuario = passport.authenticate('local', {
+    successRedirect: '/', 
+    failureFlash : true,
+    badRequestMessage: 'Ambos Campos son Obligatorios'
 });
 
 // función para revisar si el usuario está logueado o no
 
+
+// Función para revisar si el usuario esta logueado o no
 exports.usuarioAutenticado = (req, res, next) => {
-    // si el usuario está autenticado, adelante
-    if (req.isAuhenticated()) {
+
+    // si el usuario esta autenticado, adelante
+    if(req.isAuthenticated()) {
         return next();
     }
-    // si no esta , redirigir
+    // sino esta autenticado, redirigir al formulario
     return res.redirect('/login');
 }
 
-// funcion cerrar sesión
+// función para cerrar sesión
 exports.cerrarSesion = (req, res) => {
     req.session.destroy(() => {
-        res.redirect('/'); // al cerrar sesión nos lleva al home
+        res.redirect('/login'); // al cerrar sesión nos lleva al login
     })
 }
-
 // enviar token reestablecer password
 // genera el token si el usuario es valido
 exports.enviarToken =  async (req, res) => {

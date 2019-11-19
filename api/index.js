@@ -10,7 +10,7 @@ const flash = require('connect-flash')
 const passport = require('./auth/passport');
 const app = express();
 // require db
-const db = require('./db/connect-prod');
+const db = require('./db/connect');
 
 // modelos
 require('./models/Roles');
@@ -35,12 +35,15 @@ app.use(morgan('dev'));
 app.use(cors()); // habilitar cors
 //app.use(expressValidator());
 app.use(cookieParser());
-// nos permite navegar entre varias paginas sin volver a autenticar
-app.use(session({
-    secret: 'supersecreto',
-    resave: false,
-    saveUninitialized: false
+
+// sessiones nos permiten navegar entre distintas paginas sin volvernos a autenticar
+app.use(session({ 
+    secret: "keyboard cat", 
+    resave: false, 
+    saveUninitialized: false 
 }));
+
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -48,6 +51,7 @@ app.use(passport.session());
 app.use(flash());
 app.use((req, res, next) => {
     res.locals.mensajes = req.flash();
+    res.locals.usuario = {...req.user} || null;
     next();
 });
 
@@ -60,4 +64,4 @@ app.listen(app.get('port'), () => {
     console.log(`El servidor está corriendo en el puerto ${app.get('port')}`);
 });
 
-require('./handlers/emailHandler');
+//require('./handlers/emailHandler');

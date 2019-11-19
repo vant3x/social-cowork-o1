@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
 
 // usuarios
 router.post('/signup', usuariosController.registrarUsuario);
-router.post('/login', authController.autenticarUsuario, authController.msgAuth);
+router.post('/login', authController.autenticarUsuario);
 router.get('/logout', authController.cerrarSesion);
 router.post('/restablecer-password', authController.enviarToken);
 router.get('/restablecer/:token', authController.validarToken);

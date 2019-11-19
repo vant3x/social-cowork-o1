@@ -6,7 +6,7 @@ import CardsFiltros from './cards/CardsFiltro';
 
 
 
-function PropiedadesFiltro() {
+function PropiedadesFiltro(props) {
 
     return (
         <Fragment>

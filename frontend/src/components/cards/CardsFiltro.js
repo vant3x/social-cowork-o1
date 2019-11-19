@@ -20,6 +20,8 @@ function CardsFiltro() {
         fetchAPI();
     }, [propiedades]);
 
+    
+
 
     return (
          <Fragment>
@@ -39,13 +41,11 @@ function CardsFiltro() {
                     </div>
                 </div>
                 </main>
+
+            
             </div>
             </div>
         </Fragment>
-       
-
-
-
     )
 }
 

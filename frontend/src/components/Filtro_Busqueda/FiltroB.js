@@ -1,8 +1,41 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState, useEffect, createContext, useContext } from 'react';
 import './form.css';
-
+import axiosFetch from '../../config/axiosConfig';
 
 function FiltroB() {
+
+    const [filBusqueda, guardarFilBusqueda] = useState({
+        titulo: '',
+        area: '',
+        tipoPropiedadId: '',
+        precio1: '',
+        precio2: ''
+    });
+
+    const PropiedadesContext = createContext({});
+
+    const recibirCambioInput = async (e) => {
+        console.log(e.target.value);
+        guardarFilBusqueda(
+            {
+                ...filBusqueda,
+                [e.target.name] : e.target.value
+            }
+        );
+        console.log(filBusqueda)
+        console.log(filBusqueda.titulo)
+    }
+
+    const mostrarDataFiltrada = async (e) => {
+        e.preventDefault();
+       const data = await axiosFetch.post('/propiedades/filter', filBusqueda)
+            .then(res => {
+                console.log(res.data)
+                return res.data
+            }).catch(err => console.log(err))
+
+            console.log(data)
+    }
 
     return (
 
@@ -38,9 +71,25 @@ function FiltroB() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="search_button-container">
-                                <button type="submit" className="searchform_button search_button btn btn-primary btn-sm">Buscar</button>
-                            </div>
+                            <form onSubmit={mostrarDataFiltrada}>
+                                <div className="col-2">
+                                    <div className="input-group date fm" data-provide="datepicker">
+                                        <input type="text" placeholder="Buscar" 
+                                            onChange={recibirCambioInput}
+                                            name="titulo" className="form-control form-control-sm  fm" />
+                                    
+                                    </div>
+                                </div>
+
+                                <div className="search_button-container">
+                                <div className="col-2">
+                                    <div className="input-group date fm" data-provide="datepicker">
+                                    <button type="submit" className="searchform_button search_button btn btn-primary btn-sm">Buscar</button>
+
+                                    </div>
+                                </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>

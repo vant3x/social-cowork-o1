@@ -8,15 +8,15 @@ function FiltrosMas() {
 
     const fetchAPI = async () => {
         const tiposPropiedadesData = await axiosFetch.get('/tipo-propiedades');
+        console.log(tiposPropiedadesData)
 
-        setTimeout(() => {
-            guardarTipoPropiedades(tiposPropiedadesData.data);
-        }, 300);
+        guardarTipoPropiedades(tiposPropiedadesData.data);
+     
     }
 
     useEffect(() => {
         fetchAPI();
-    }, [tipoPropiedades]);
+    }, []);
     return (
         <Fragment>
 

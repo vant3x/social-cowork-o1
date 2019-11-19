@@ -63,10 +63,11 @@ const bcrypt = require('bcrypt-nodejs');
      }
  });
 
- // metodos personalizados
- Usuarios.prototype.verificarPassword = function (password) {
-     return bcrypt.compareSync(password, this.password);
- }
+// Métodos personalizados
+Usuarios.prototype.verificarPassword = function(password) {
+    return bcrypt.compareSync(password, this.password);
+}
+
 
  Usuarios.belongsTo(Roles);
 //Usuarios.hasMany(Propiedades);

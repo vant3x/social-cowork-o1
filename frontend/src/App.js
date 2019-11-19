@@ -27,7 +27,7 @@ class App extends React.Component {
             <Route exact path="/Pago" component={Pago} />
             <Route exact path="/PropiedadesFiltro" component={PropiedadesFiltro} />
             <Route exact path="/propiedad/:id" component={PropiedadesInfo} />
-            <Route exact path="/Formpropiedades" component={Formpropiedades} />
+            <Route exact path="/nueva-propiedad" component={Formpropiedades} />
             <Route exact path="/Email" componet={Email} />
             <Route exact path='/Formdash' component={Formdash} />
           </Switch>
