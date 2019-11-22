@@ -31,7 +31,7 @@ const bcrypt = require('bcrypt-nodejs');
       
     },
     password: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(60),
         allowNull: false,
         validate: {
             notEmpty: {

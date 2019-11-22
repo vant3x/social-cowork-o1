@@ -43,6 +43,7 @@ exports.nuevaPropiedad = async (req, res, next) => {
 
     const { titulo, descripcion, precio, sector, direccion, area, banios, habitaciones, cod_referencia, tipoPropiedadId } = req.body;
     const estadoDisponible = 0;
+    
     const img1 = "NULL";
     const img2 = "NULL";
 
@@ -76,6 +77,7 @@ exports.nuevaPropiedad = async (req, res, next) => {
 exports.mostrarPropiedades = async (req, res, next) => {
     const propiedades = await Propiedades.findAll();
     res.json(propiedades);
+
 }
 
 // mostrar propiedad especifica

@@ -3,12 +3,11 @@ const morgan = require('morgan');
 const cors = require('cors');
 const path =  require('path');
 const routes = require('./routes/index');
-const session = require('express-session');
+const session = require('express-session'); 
 const cookieParser = require('cookie-parser');
 const expressValidator = require('express-validator');
 const flash = require('connect-flash')
-const passport = require('./auth/passport');
-const app = express();
+const passport = require('./config/passport');
 // require db
 const db = require('./db/connect');
 
@@ -25,6 +24,8 @@ db.sync()
     .then(() => console.log('Conectado al Servidor de la BD'))
     .catch(error => console.log(error));
 
+const app = express();
+
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
@@ -32,7 +33,10 @@ app.set('port', 5000 || process.env.PORT);
 
 // middlewares
 app.use(morgan('dev'));
-app.use(cors()); // habilitar cors
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials:true
+})); // habilitar cors
 //app.use(expressValidator());
 app.use(cookieParser());
 
@@ -52,8 +56,13 @@ app.use(flash());
 app.use((req, res, next) => {
     res.locals.mensajes = req.flash();
     res.locals.usuario = {...req.user} || null;
+    console.log(res.locals.usuario);
+
     next();
+
+    
 });
+
 
 /// rutas
 app.use('/',routes);

@@ -63,14 +63,7 @@ function FiltroB() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-2">
-                                <div className="input-group date fm" data-provide="datepicker">
-                                    <input type="text" placeholder="Salida" className="form-control form-control-sm  fm" />
-                                    <div className="input-group-addon">
-                                        <span className="glyphicon glyphicon-th"></span>
-                                    </div>
-                                </div>
-                            </div>
+           
                             <form onSubmit={mostrarDataFiltrada}>
                                 <div className="col-2">
                                     <div className="input-group date fm" data-provide="datepicker">

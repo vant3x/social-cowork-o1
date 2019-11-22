@@ -1,29 +1,41 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
+import axiosFetch from '../../config/axiosConfig';
 import { Link } from 'react-router-dom';
 import './nav.css';
 
 
-class Nav extends React.Component {
+const Nav = props => {
 
-    
+    const [filBusqueda, guardarFilBusqueda] = useState({
+        titulo: '',
+        area: '',
+        tipoPropiedadId: '',
+        precio1: '',
+        precio2: ''
+    });
 
-    componentDidUpdate(){
-        let isLogged = localStorage.getItem('logged')
-        if (isLogged === true) document.querySelector('#login_nav_item').classList.add('.login_nav_item')
+    const recibirCambioInput = async (e) => {
+        console.log(e.target.value);
+        guardarFilBusqueda(
+            {
+                ...filBusqueda,
+                [e.target.name] : e.target.value
+            }
+        );
+        console.log(filBusqueda)
+        console.log(filBusqueda.titulo)
     }
 
-    render() {
+    const mostrarDataFiltrada = async (e) => {
+        e.preventDefault();
+       const data = await axiosFetch.post('/propiedades/filter', filBusqueda)
+            .then(res => {
+                console.log(res.data)
+                return res.data
+            }).catch(err => console.log(err))
 
-        const NuncaExpandirse = {
-            verticalAlign: 'inherit',
-            color:'black'
-        }
-
-        const nav = {
-            backgroundColor: '#000'
-        }
-
-         const login = false;
+            console.log(data)
+    }
 
         return (
             <Fragment>
@@ -38,14 +50,14 @@ class Nav extends React.Component {
                                 <nav className="navbar navbar-expand-sm ml-5">
 
                                 <a className="navbar-brand" href="#">
-                                        <font style={NuncaExpandirse}>
-                                            <font style={NuncaExpandirse}>Social-Cowork</font>
-                                        </font>
+                                    
+                                        Social-Cowork
+                                        
                                     </a>
                                   
 
 
-                                    <button className="navbar-toggler collapsed navbar-dark " style={nav}
+                                    <button className="navbar-toggler collapsed navbar-dark " 
                                         type="button" data-toggle="collapse" data-target="#navbarsExample01"
                                         aria-controls="navbarsExample01" aria-expanded="false"
                                         aria-label="Navegación de palanca">
@@ -56,12 +68,12 @@ class Nav extends React.Component {
                                         <ul className="navbar-nav mr-auto">
                                             <li className="nav-item active">
                                                 <Link className="nav-link" to={"/"}>
-                                                    <font style={NuncaExpandirse}>
-                                                        <font style={NuncaExpandirse}>Inicio </font>
-                                                    </font><span className="sr-only">
-                                                        <font style={NuncaExpandirse}>
-                                                            <font style={NuncaExpandirse}>(actual)</font>
-                                                        </font>
+                                                
+                                                    Inicio 
+                                                    <span className="sr-only">
+                                                    
+                                                        (actual)
+                                                        
                                                     </span>
                                                 </Link>
                                             </li>
@@ -70,11 +82,7 @@ class Nav extends React.Component {
                                                     Explorar
                                                 </Link>
                                             </li>
-                                           {/* <li className="nav-item">
-                                                <Link className="nav-link" to={"/Registro"}>
-                                                    Registro
-                                                </Link>
-        </li>*/}
+         
                                             <li className="nav-item" id="login_nav_item">
                                                 <Link className="nav-link " to={"/Login"}>
                                                    
@@ -89,9 +97,16 @@ class Nav extends React.Component {
 
                                             </li>
                                         </ul>
-                                        <form className="form-inline  my-md-0 ">
-                                            <input className="form-control form-control-sm"
-                                                name="titulo" type="text" placeholder="Buscar" aria-label="Buscar" />
+                                        
+                                        <form className="form-inline  my-md-0 " onSubmit={mostrarDataFiltrada}>
+                                            <input 
+                                                className="form-control form-control-sm"
+                                                name="titulo" type="text" placeholder="Buscar"
+                                                 aria-label="Buscar"
+                                                 onChange={recibirCambioInput}
+                                                 />
+                                             <button type="submit" className="ml-2 searchform_button search_button btn btn-primary btn-sm">Buscar</button>
+
                                         </form>
                                     </div>
                                 </nav>
@@ -105,7 +120,6 @@ class Nav extends React.Component {
             </Fragment>
 
         );
-    }
 }
 
 export default Nav;

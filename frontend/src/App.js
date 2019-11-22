@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, createContext, useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Nav from "./components/Nav/Nav";
 import Home from "./components/Home";
@@ -12,6 +12,10 @@ import Recuperar from "./components/Recuperar";
 import Email from "./components/Email/Email";
 import Formdash from './components/forms/Formdash';
 import './animated.css';
+
+const NavContext = createContext({
+  propiedades: {}
+});
 
 class App extends React.Component {
   render() {

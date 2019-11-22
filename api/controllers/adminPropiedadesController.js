@@ -8,7 +8,7 @@ const Op = sequelize.Op;
 // reservas
 exports.hacerReserva = async (req, res, next) => {
     const {fecha_in, fecha_out} = req.body; 
-    const clientePrueba = 9;
+    const cliente = req.locals.usuario.id;
     const {idPropiedad} = req.params.id;
     // info de la propiedad para calcular el valor total
     const propiedadInfo = await Propiedades.findOne({
@@ -23,7 +23,7 @@ exports.hacerReserva = async (req, res, next) => {
         fecha_in,
         fecha_out,
         valor,
-        clientePrueba,
+        cliente,
         idPropiedad
     })
     .then(() => {

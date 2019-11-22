@@ -5,19 +5,11 @@ const Op = Sequelize.Op;
 
 const crypto = require('crypto');
 
-exports.msgAuth = (req, res, next) => {
-    res.locals.mensajes;
-    next();
-}
-    
 exports.autenticarUsuario = passport.authenticate('local', {
     successRedirect: '/', 
     failureFlash : true,
     badRequestMessage: 'Ambos Campos son Obligatorios'
 });
-
-// función para revisar si el usuario está logueado o no
-
 
 // Función para revisar si el usuario esta logueado o no
 exports.usuarioAutenticado = (req, res, next) => {
@@ -33,9 +25,10 @@ exports.usuarioAutenticado = (req, res, next) => {
 // función para cerrar sesión
 exports.cerrarSesion = (req, res) => {
     req.session.destroy(() => {
-        res.redirect('/login'); // al cerrar sesión nos lleva al login
+        res.redirect('/iniciar-sesion'); // al cerrar sesión nos lleva al login
     })
 }
+
 // enviar token reestablecer password
 // genera el token si el usuario es valido
 exports.enviarToken =  async (req, res) => {
