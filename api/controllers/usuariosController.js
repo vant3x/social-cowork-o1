@@ -4,12 +4,12 @@ exports.registrarUsuario = async (req, res, next) => {
     const fecha1 = Date.now();
     const ultima_sesion = new Date();
 
-    const {nombre, apellido, email, password, ciudad, direccion, estado_usuario} = req.body;
-  /*  const nombre = null;
-    const apellido = null;
-    const direccion = null;
-    const ciudad = null;*/
-    const roleId = 2;
+    const {email, password, roleId } = req.body;
+    const nombre = "null";
+    const apellido = "null";
+    const direccion = "null";
+    const estado_usuario = 1;
+    const ciudad = "null";
     try {
         const usuario = await Usuarios.create({
             nombre,

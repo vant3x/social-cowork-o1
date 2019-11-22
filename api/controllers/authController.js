@@ -22,6 +22,14 @@ exports.usuarioAutenticado = (req, res, next) => {
     return res.redirect('/login');
 }
 
+exports.validarAuth = (req, res) => {
+    const auth = req.isAuthenticated();
+    res.json(auth);
+    console.log(auth)
+}
+
+
+
 // función para cerrar sesión
 exports.cerrarSesion = (req, res) => {
     req.session.destroy(() => {

@@ -54,13 +54,28 @@ function Formpropiedades(props) {
   const agregarPropiedadApi = async e => {
     e.preventDefault();
 
-    try {
-      const res = await axiosFetch.post("/nueva-propiedad", propiedad, {});
+     // // crear un formdata
+    // const formData = new FormData();
+    // formData.append("titulo", propiedad.titulo);
+    // formData.append("descripcion", propiedad.descripcion);
+    // formData.append("precio", propiedad.precio);
+    // formData.append("sector", propiedad.sector);
+    // formData.append("direccion", propiedad.direccion);
+    // formData.append("area", propiedad.area);
+    // formData.append("banios", propiedad.banios);
+    // formData.append("habitaciones", propiedad.habitaciones);
+    // formData.append("img1", archivo);
+    // formData.append("img2", archivo);
 
+    try {
+      const res = await axiosFetch.post("/nueva-propiedad", propiedad, {
+        // headers: {
+        //   "Content-Type": "multipart/form-data"
+        // }
+      });
       if (res.status === 200) {
         Swal.fire("Propiedad agregada", res.data.mensaje, "success");
       }
-
       // redireccionar
       props.history.push("/PropiedadesFiltro");
     } catch (error) {

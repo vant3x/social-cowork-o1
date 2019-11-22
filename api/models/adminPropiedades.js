@@ -21,5 +21,4 @@ const adminPropiedades = db.define('admin_propiedades', {
 adminPropiedades.belongsTo(Cliente, {as:'cliente'});
 adminPropiedades.belongsTo(Propiedades);
 
-
 module.exports = adminPropiedades;

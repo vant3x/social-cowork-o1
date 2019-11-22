@@ -1,9 +1,9 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import "./css/sb-admin-2.css";
 import axiosFetch from "../config/axiosConfig";
 
-function Login() {
+function Login({history}) {
 
   const [usuario, guardarUsuario] = useState({
       email: '',
@@ -23,10 +23,8 @@ function Login() {
 
     axiosFetch.post('/login', usuario);
     console.log(usuario);
+    history.push('/');
   }
-
-
-  //const activarLoginFake = localStorage.setItem()
 
   return (
     <Fragment>
@@ -125,4 +123,4 @@ function Login() {
     </Fragment>
   );
 }
-export default Login;
+export default withRouter(Login);

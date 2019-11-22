@@ -3,32 +3,41 @@ const Usuarios = require('../models/Usuarios');
 const Propiedades = require('../models/Propiedades');
 const db = require('../db/connect');
 const sequelize = require('sequelize');
+const moment = require('moment');
 const Op = sequelize.Op;
 
 // reservas
 exports.hacerReserva = async (req, res, next) => {
     const {fecha_in, fecha_out} = req.body; 
-    const cliente = req.locals.usuario.id;
-    const {idPropiedad} = req.params.id;
+    let fecha1 = moment(fecha_in);
+    let fecha2 =  moment(fecha_out);
+    const diasTotales = (fecha2.diff(fecha1, 'days'));
+    const cliente = {...req.user};
+    cliente_id_usuario = cliente.id_usuario;
+    const {idPropiedad} = req.params;
     // info de la propiedad para calcular el valor total
-    const propiedadInfo = await Propiedades.findOne({
+    const propiedad = await Propiedades.findOne({
         where: {
             id_propiedades: idPropiedad
         }
     });
-
-    // const valorTotal = valor * propiedadInfo.precio;
+    
+    const precio = propiedad.precio;
+    const propiedadId = propiedad.id_propiedades;
+    console.log(precio);
+   
+    const valor = diasTotales * precio;
 
     const reserva = await adminPropiedades.create({
         fecha_in,
         fecha_out,
         valor,
-        cliente,
-        idPropiedad
+        cliente_id_usuario,
+        propiedadId
     })
     .then(() => {
         console.log('Reserva con exito');
-        res.send('Hola we, se reservó');
+        res.json({mensaje:'Hola we, se reservó'});
       }).catch(error => console.log(error));
     
     if(!reserva) {

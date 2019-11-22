@@ -5,6 +5,8 @@ import './nav.css';
 
 
 const Nav = props => {
+    
+    const isLoggedIn = props.isLoggedIn;
 
     const [filBusqueda, guardarFilBusqueda] = useState({
         titulo: '',
@@ -35,6 +37,28 @@ const Nav = props => {
             }).catch(err => console.log(err))
 
             console.log(data)
+    }
+
+    const renderLoginSignup = () => {
+        if (isLoggedIn !== true) {
+            return(
+               <Fragment>
+                    <li className="nav-item" id="login_nav_item">
+                <Link className="nav-link " to={"/login"}>
+                       Login 
+                </Link>
+            </li>
+
+            <li className="nav-item" id="login_nav_item">
+            <Link className="nav-link " to={"/registrar"}>
+                Registrar
+            </Link>
+            </li>
+               </Fragment>
+            )
+        } else {
+            return null;
+        }
     }
 
         return (
@@ -82,13 +106,9 @@ const Nav = props => {
                                                     Explorar
                                                 </Link>
                                             </li>
-         
-                                            <li className="nav-item" id="login_nav_item">
-                                                <Link className="nav-link " to={"/Login"}>
-                                                   
-                                                       Login 
-                                                </Link>
-                                            </li>
+
+                                            {renderLoginSignup()}
+
                                             <li className="nav-item dropdown">
                                                 <Link className="nav-link " to={"/Pago"} id="dropdown01" aria-haspopup="true"
                                                     aria-expanded="false">

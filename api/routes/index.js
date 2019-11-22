@@ -12,8 +12,12 @@ router.get('/', (req, res) => {
   res.send('funciona');
 });
 
+router.get('/authValidate', authController.validarAuth);
+
 // usuarios
-router.post('/signup', usuariosController.registrarUsuario);
+router.post('/signup', 
+    usuariosController.registrarUsuario
+);
 router.post('/login', authController.autenticarUsuario);
 router.get('/logout', authController.cerrarSesion);
 router.post('/restablecer-password', authController.enviarToken);
@@ -25,7 +29,8 @@ router.post('/nueva-propiedad',
     propiedadesController.nuevaPropiedad,
     authController.usuarioAutenticado
 );
-router.get('/propiedades', propiedadesController.mostrarPropiedades);
+router.get('/propiedades', propiedadesController.mostrarPropiedades,
+authController.validarAuth);
 router.get('/propiedades/:idPropiedad', propiedadesController.mostrarPropiedadId);
 //tipo propiedad
 router.get('/tipo-propiedades', tipoPropiedadesController.mostrarTipoPropiedad);

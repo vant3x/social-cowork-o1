@@ -56,11 +56,10 @@ app.use(flash());
 app.use((req, res, next) => {
     res.locals.mensajes = req.flash();
     res.locals.usuario = {...req.user} || null;
-    console.log(res.locals.usuario);
-
-    next();
-
-    
+    res.locals.authValidate = req.isAuthenticated() || false;
+    // console.log(res.locals.usuario);
+    // console.log(res.locals.authValidate);
+    next();    
 });
 
 

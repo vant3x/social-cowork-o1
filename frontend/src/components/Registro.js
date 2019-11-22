@@ -30,14 +30,7 @@ const [usuario, guardarUsuario] = useState({
 
         fetchAxios.post('/signup',  usuario)
             .then(res => {
-                // validar si hay errores de mongo
-                if (res.data.code === 11000) {
-                    console.log('Error de duplicado de Mongo');
-            
-                } else {
-                    console.log(res); 
-                
-                }
+              
                 // redireccionar
                 history.push('/');
 

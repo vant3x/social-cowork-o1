@@ -16,7 +16,7 @@ function CardFiltroDetalle(props) {
                     <p className="card-text">
                           {props.propiedad.descripcion}
                     </p>
-                    <strong>Precio: ${props.propiedad.precio}.000</strong>
+                    <strong>Precio: ${props.propiedad.precio}</strong>
                     <div className="d-flex justify-content-between align-items-center">
                       <div className="btn-group">
                       <Link to={`/propiedad/${props.propiedad.id_propiedades}`}>

@@ -87,6 +87,7 @@ exports.mostrarPropiedadId = async (req, res, next) => {
             id_propiedades: req.params.idPropiedad
         }
     });
+    
     res.json(propiedad);
 }
 

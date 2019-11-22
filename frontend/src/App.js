@@ -12,21 +12,36 @@ import Recuperar from "./components/Recuperar";
 import Email from "./components/Email/Email";
 import Formdash from './components/forms/Formdash';
 import './animated.css';
+import axiosFetch from './config/axiosConfig';
+
 
 const NavContext = createContext({
   propiedades: {}
 });
 
-class App extends React.Component {
-  render() {
+function App (props) {
+ 
+  const [authSession, guardarAuthSession] = useState(false);
+  console.log(authSession);
+
+  const fetchAPI = async () => {
+    const dataAuth = await axiosFetch.get('/authValidate');
+  
+    guardarAuthSession(dataAuth.data);
+  }
+
+  useEffect(() => {
+    fetchAPI();
+  }, [authSession]);
+
     return (
       <Router>
         <Fragment>
-          <Nav />
+          <Nav isLoggedIn={authSession} />
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route exact path="/Login" component={Login} />
-            <Route exact path="/Registro" component={Registro} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/registrar" component={Registro} />
             <Route exact path="/Recuperar" component={Recuperar} />
             <Route exact path="/Pago" component={Pago} />
             <Route exact path="/PropiedadesFiltro" component={PropiedadesFiltro} />
@@ -38,7 +53,7 @@ class App extends React.Component {
         </Fragment>
       </Router>
     );
-  }
+  
 }
 
 export default App;
