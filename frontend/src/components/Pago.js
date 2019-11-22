@@ -2,12 +2,15 @@ import React, { Fragment } from 'react';
 import './css/pago.css';
 
 
+
+
 function Pago() {
+
 
     return (
         <Fragment>
 
-            <div className="bg-light">
+            <div className="">
                 <div className="container">
                     <div className="text-center mt-5">
                         <h2>Fomulario de Pago</h2>
@@ -74,9 +77,9 @@ function Pago() {
                                     </div>
                                 </div>
                                 <div>
-                                <i class="fab fa-cc-visa"></i>
-                                <i class="fab fa-cc-mastercard"></i>
-                                <i class="fab fa-cc-paypal"></i>
+                                    <i class="fab fa-cc-visa"></i>
+                                    <i class="fab fa-cc-mastercard"></i>
+                                    <i class="fab fa-cc-paypal"></i>
 
 
 

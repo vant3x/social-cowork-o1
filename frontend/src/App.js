@@ -13,7 +13,6 @@ import Email from "./components/Email/Email";
 import Formdash from './components/forms/Formdash';
 import './animated.css';
 import './App.scss';
-import './css/main.css';
 
 const loading = () => <div className="animated fadeIn pt-3 text-center">Loading...</div>;
 

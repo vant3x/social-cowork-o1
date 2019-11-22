@@ -407,7 +407,7 @@ In most cases bumping the `react-scripts` version in `package.json` and running 
 - temp tweaks(b4 beta3): `InputGroupAddon` and `InputGroupButton` 
 - refactor(checkboxes, radios): temp tweaks 
 - feat: mobile sidebar link click closes the sidebar
-- fix: .nav-tabs .nav-link `cursor: pointer`
+- fix: .nav-tabs . `cursor: pointer`
 
 ###### `v1.0.6`
 

@@ -9,8 +9,12 @@ const expressValidator = require('express-validator');
 const flash = require('connect-flash')
 const passport = require('./auth/passport');
 const app = express();
+
+
 // require db
 const db = require('./db/connect');
+
+app.use(express.static(path.join(__dirname, 'Sockets')));
 
 // modelos
 require('./models/Roles');
@@ -54,10 +58,24 @@ app.use((req, res, next) => {
 /// rutas
 app.use('/', routes);
 
+
 app.use(express.static('./uploads'));
 
-app.listen(app.get('port'), () => {
+const server = app.listen(app.get('port'), () => {
     console.log(`El servidor está corriendo en el puerto ${app.get('port')}`);
 });
 
 require('./handlers/emailHandler');
+
+
+//websockets
+const socketIO = require('socket.io');
+const io = socketIO.listen(server);
+
+io.on('connection', (socket) => {
+    console.log('new connection');
+
+    socket.on('chat:message', (data) => {
+        io.sockets.emit('chat:message', data)
+    })
+})

@@ -8,8 +8,10 @@ const propiedadesController = require('./../controllers/propiedadesController');
 const tipoPropiedadesController = require('../controllers/tipoPropiedadController');
 const adminPropiedadesController = require('../controllers/adminPropiedadesController');
 
-router.get('/', (req, res) => {
-    res.send('funciona');
+
+
+router.get('/hello', (req, res) => {
+    res.render('funciona');
 });
 
 // usuarios
@@ -46,4 +48,5 @@ router.delete('/eliminar-propiedad/:idPropiedad',
 router.post('/propiedades/reserva/:idPropiedad',
     // authController.usuarioAutenticado,
     adminPropiedadesController.hacerReserva);
+
 module.exports = router;
