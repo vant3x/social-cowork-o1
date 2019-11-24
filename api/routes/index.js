@@ -10,7 +10,7 @@ const adminPropiedadesController = require('../controllers/adminPropiedadesContr
 
 
 
-router.get('/hello', (req, res) => {
+router.get('/', (req, res) => {
     res.render('funciona');
 });
 

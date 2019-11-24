@@ -11,6 +11,7 @@ import Formpropiedades from "./components/forms/Formpropiedades";
 import Recuperar from "./components/Recuperar";
 import Email from "./components/Email/Email";
 import Formdash from './components/forms/Formdash';
+import EditarPropiedad from "./components/forms/EditarPropiedad";
 import './animated.css';
 import './App.scss';
 
@@ -46,6 +47,7 @@ class App extends React.Component {
                 <Route exact path="/Formpropiedades" component={Formpropiedades} />
                 <Route exact path="/Email" componet={Email} />
                 <Route exact path='/Formdash' component={Formdash} />
+                <Route exact path='/EditarPropiedad' component={EditarPropiedad} />
 
                 {/*Dashboard */}
 

@@ -1,142 +1,57 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
-class Typography extends Component {
-  render() {
 
-    const NuncaExpandirse = {
-      verticalAlign: 'inherit'
+function Typography(props) {
+
+  const NuncaExpandirse = {
+    verticalAlign: 'inherit'
   }
-    return (
+  return (
 
-      <div className="text-center">
-      <div className=" cover-container d-flex w-100 p-3 mx-auto flex-column navegar">
+    <div className="col-md-4">
+      <div className="card mb-4 shadow-sm">
+        <img src="img/home3.jpg" className="img"></img>
 
-          <main role="main">
+        <div className="card-body">
+          <h5 className="card-title">{props.propiedad}</h5>
+          <p className="card-text">
+            {props.propiedad}
+          </p>
+          <strong>Precio: ${props.propiedad}</strong>
+          <div className="d-flex justify-content-between align-items-center">
+            <div className="btn-group">
 
-              <div className="album py-5 ">
-                  <div className="container">
-
-                      <div className="row">
-                          <div className="col-md-4">
-                              <div className="card mb-4 shadow-sm">
-                                
-                              <img src="img/home3.jpg" className="img"></img>
-
-                                  <div className="card-body">
-                                   
-                                      <h5 className="card-title">Oficina</h5>
-                                      <p className="card-text">
-
-                                      Una gran oficina con sofas y mesas, muy buena iluminación y conexión veloz a internetEste contenido es un poco más largo.
+              <div className="btn-group">
 
 
+                <Link to={`/EditarPropiedad`}>
 
+                  <button type="button" class="btn btn-outline-success btn-sm">
+                    Editar </button> </Link>
 
-                                      </p>
-                                      <div className="d-flex justify-content-between align-items-center">
-                                          <div className="btn-group">
-                                              <button type="button" class="btn btn-outline-success btn-sm">
-                                                  Editar                                                                             
-                                              </button>
-                                              <button type="button" class="btn btn-outline-danger btn-sm">
-                                                  Eliminar
-                                                                                                                                          
-                                              </button>
-                                           
-                                          </div>
-                                          <small className="text-muted">
-                                            
-                                                 9 minutos
-                                          </small>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
+                <Link to={`/`}>
+                  <button type="button" class="btn btn-outline-danger btn-sm">
+                    Eliminar</button>
 
-                          <div className="col-md-4">
-                              <div className="card mb-4 shadow-sm">
-                                
-                              <img src="img/home3.jpg" className="img"></img>
-
-                                  <div className="card-body">
-                                   
-                                          <h5 className="card-title">Entre Bosques</h5>
-                                          <p className="card-text">
-                                          
-                                         Edificio con varias zonas utiles, una linda vegetación y mucho espacio
-
-
-                                      </p>
-                                      <div className="d-flex justify-content-between align-items-center">
-                                          <div className="btn-group">
-                                              <button type="button" className="btn btn-sm btn-outline-secondary">
-                                                
-                                                  <a href="/Propiedadesinfo">editar</a>
-                                                 
-                                              </button>
-                                              <button type="button" className="btn btn-sm btn-outline-secondary">
-                                                  <a href="/Propiedadesinfo">eliminar</a>
-                                                                                                                                          
-                                              </button>
-                                           
-                                          </div>
-                                          <small className="text-muted">
-                                              
-                                                 9 minutos
-                                              
-                                          </small>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                          <div className="col-md-4">
-                              <div className="card mb-4 shadow-sm">
-                                
-                              <img src="img/home3.jpg" className="img"/>
-
-                                  <div className="card-body">
-                                   
-                                          <h5 className="card-title">Poblado del Sur</h5>
-                                          <p className="card-text">
-                                          Apto en la Estrella con linda vista a un bosque desde postman xdEste contenido es un poco más largo.
-
-
-                                      </p>
-                                      <div className="d-flex justify-content-between align-items-center">
-                                          <div className="btn-group">
-                                              <button type="button" className="btn btn-sm btn-outline-secondary">
-                                                
-                                                  <a  href="/Propiedadesinfo">editar</a>
-                                              
-                                              </button>
-                                              <button type="button" className="btn btn-sm btn-outline-secondary">
-                                                  <a href="/Propiedadesinfo">eliminar</a>
-                                                                                                                                          
-                                              </button>
-                                           
-                                          </div>
-                                          <small className="text-muted">
-                                            9 minutos
-                                          </small>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-
-
-
-
-                      </div>
-                  </div>
+                </Link>
               </div>
 
 
-          </main>
+            </div>
+            <small className="text-muted">
+              <font style={NuncaExpandirse}>
+                <font style={NuncaExpandirse}>9 minutos</font>
+              </font>
+            </small>
+          </div>
+        </div>
       </div>
-  </div>
+    </div>
 
-    );
-  }
+
+
+  );
 }
 
 export default Typography;
