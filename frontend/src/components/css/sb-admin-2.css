@@ -4557,10 +4557,11 @@ input[type="button"].btn-block {
   list-style: none;
   background-color: #eaecf4;
   border-radius: 0.35rem;
+  margin-left: 1rem;
 }
 
 .breadcrumb-item + .breadcrumb-item {
-  padding-left: 0.5rem;
+  padding-left: 3em;
 }
 
 .breadcrumb-item + .breadcrumb-item::before {
@@ -10424,7 +10425,7 @@ a:focus {
   color: #fff;
 }
 
-.sidebar-dark .nav-item .nav-link:active i, .sidebar-dark .nav-item .nav-link:focus i, .sidebar-dark .nav-item .nav-link:hover i {
+-dark .nav-item .nav-link:active i, .sidebar-dark .nav-item .nav-link:focus i, .sidebar-dark .nav-item .nav-link:hover i {
   color: #fff;
 }
 

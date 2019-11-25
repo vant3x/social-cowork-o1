@@ -2,9 +2,10 @@
 
 header{
  background:blue;
-font-size: 3em;
+font-size: 1em;
 color:white;
 margin: 0 !important;
+position: absolute !important;
 }
 
 .nav-link{
@@ -32,4 +33,9 @@ margin: 0 !important;
     display: flex;
     -ms-flex-align: center;
     background-color: #f5f5f5;
+ }
+
+ .nombre{
+   font-weight: bold;
+   font-size:1.2em;
  }
