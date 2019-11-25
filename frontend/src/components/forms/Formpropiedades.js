@@ -39,6 +39,7 @@ function Formpropiedades(props) {
   const agregarPropiedadApi = async e => {
     e.preventDefault();
 
+<<<<<<< HEAD
      // // crear un formdata
    const formData = new FormData();
    formData.append("titulo", propiedad.titulo);
@@ -56,6 +57,24 @@ function Formpropiedades(props) {
       const res = await axiosFetch.post("/nueva-propiedad", formData, {
          headers: {
            "Content-Type": "multipart/form-data"
+=======
+    // crear un formdata
+    const formData = new FormData();
+    formData.append("titulo", propiedad.titulo);
+    formData.append("descripcion", propiedad.descripcion);
+    formData.append("precio", propiedad.precio);
+    formData.append("sector", propiedad.sector);
+    formData.append("direccion", propiedad.direccion);
+    formData.append("area", propiedad.area);
+    formData.append("banios", propiedad.banios);
+    formData.append("habitaciones", propiedad.habitaciones);
+    formData.append("imagen", archivo);
+
+    try {
+      const res = await axiosFetch.post("/admin/propiedades", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+>>>>>>> b9497be3f1fbff2d9224d37689a5b42287a7f768
         }
       });
       if (res.status === 200) {
@@ -73,6 +92,7 @@ function Formpropiedades(props) {
     }
   };
 
+<<<<<<< HEAD
     // leer data form
     const actualizarState = e => {
       guardarPropiedad({
@@ -90,6 +110,8 @@ function Formpropiedades(props) {
   
 
 
+=======
+>>>>>>> b9497be3f1fbff2d9224d37689a5b42287a7f768
   const ancho = { width: "500px" };
 
   return (
@@ -103,7 +125,7 @@ function Formpropiedades(props) {
                 <legend>Todos los campos son requeridos*</legend>
                 <hr />
                 <div className="form-group">
-                  <label for="precio">Título</label>
+                  <label for="titulo">Título</label>
                   <input
                     type="text"
                     required
@@ -116,7 +138,7 @@ function Formpropiedades(props) {
                 </div>
                 <div className="row">
                   <div className="col">
-                    <label for="banios">Tipo</label>
+                    <label for="tipo">Tipo</label>
                     <select
                       name="tipoPropiedadId"
                       required
@@ -197,26 +219,16 @@ function Formpropiedades(props) {
                   </div>
                 </div>
                 <div className="form-group">
-                  <label for="img_principal">Imagen principal</label>
+                  <label for="imagen">Imagen </label>
                   <input
                     type="file"
                     className="form-control"
                     placeholder="Sube la imagen principal"
-                    name="img1"
-                    id="img_principal"
+                    name="imagen"
+                    id="imagen"
                     onChange={leerArchivo}
                   />
-                  <div className="form-group">
-                    <label for="img_sec">Imagen dos</label>
-                    <input
-                      type="file"
-                      className="form-control"
-                      placeholder="Sube otra imagen"
-                      name="img2"
-                      id="img_sec"
-                      onChange={leerArchivo}
-                    />
-                  </div>
+
                   <div className="row">
                     <div className="col">
                       <label for="habitaciones">Habitaciones</label>

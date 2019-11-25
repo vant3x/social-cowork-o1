@@ -1,2 +1,9 @@
+<<<<<<< HEAD
 ./node_modules
 /node_modules
+=======
+./node_modules
+/node_modules
+./uploads
+/uploads
+>>>>>>> b9497be3f1fbff2d9224d37689a5b42287a7f768
