@@ -9,6 +9,7 @@ import PropiedadesFiltro from "./components/PropiedadesFiltro";
 import PropiedadesInfo from "./components/PropiedadesInfo";
 import Formpropiedades from "./components/forms/Formpropiedades";
 import EditarPropiedad from "./components/forms/EditarPropiedad";
+import Propiedad from "./components/forms/EliminarPropiedad";
 import Recuperar from "./components/Recuperar";
 import Email from "./components/Email/Email";
 import Formdash from "./components/forms/Formdash";
@@ -50,8 +51,10 @@ function App(props) {
           />
           <Route exact path="/propiedad/:id" component={PropiedadesInfo} />
           <Route exact path="/nueva-propiedad" component={Formpropiedades} />
-          {/* <Route exact path="/editar-propiedad" component={EditarPropiedad} /> */}
+          {/* <Route exact path="/productos/editar/:id" component={EditarPropiedad} /> */}
           <Route exact path="/Email" componet={Email} />
+          <Route exact path="/propiedades/eliminar/:id" componet={Propiedad} />
+
           <Route exact path="/Formdash" component={Formdash} />
         </Switch>
       </Fragment>
