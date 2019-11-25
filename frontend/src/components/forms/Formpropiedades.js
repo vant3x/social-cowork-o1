@@ -29,8 +29,6 @@ function Formpropiedades(props) {
     direccion: "",
     area: "",
     banios: "",
-    img1: "",
-    img2: "",
     habitaciones: "",
     tipoPropiedadId: ""
   });
@@ -54,24 +52,23 @@ function Formpropiedades(props) {
   const agregarPropiedadApi = async e => {
     e.preventDefault();
 
-     // // crear un formdata
-    // const formData = new FormData();
-    // formData.append("titulo", propiedad.titulo);
-    // formData.append("descripcion", propiedad.descripcion);
-    // formData.append("precio", propiedad.precio);
-    // formData.append("sector", propiedad.sector);
-    // formData.append("direccion", propiedad.direccion);
-    // formData.append("area", propiedad.area);
-    // formData.append("banios", propiedad.banios);
-    // formData.append("habitaciones", propiedad.habitaciones);
-    // formData.append("img1", archivo);
-    // formData.append("img2", archivo);
+    // crear un formdata
+    const formData = new FormData();
+    formData.append("titulo", propiedad.titulo);
+    formData.append("descripcion", propiedad.descripcion);
+    formData.append("precio", propiedad.precio);
+    formData.append("sector", propiedad.sector);
+    formData.append("direccion", propiedad.direccion);
+    formData.append("area", propiedad.area);
+    formData.append("banios", propiedad.banios);
+    formData.append("habitaciones", propiedad.habitaciones);
+    formData.append("imagen", archivo);
 
     try {
-      const res = await axiosFetch.post("/nueva-propiedad", propiedad, {
-        // headers: {
-        //   "Content-Type": "multipart/form-data"
-        // }
+      const res = await axiosFetch.post("/admin/propiedades", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
       });
       if (res.status === 200) {
         Swal.fire("Propiedad agregada", res.data.mensaje, "success");
@@ -88,37 +85,37 @@ function Formpropiedades(props) {
     }
   };
 
-  const validarPropiedad = () => {
-    const {
-      titulo,
-      descripcion,
-      precio,
-      sector,
-      direccion,
-      area,
-      banios,
-      img1,
-      img2,
-      habitaciones,
-      tipoPropiedadId
-    } = propiedad;
+  // const validarPropiedad = () => {
+  //   const {
+  //     titulo,
+  //     descripcion,
+  //     precio,
+  //     sector,
+  //     direccion,
+  //     area,
+  //     banios,
+  //     img1,
+  //     img2,
+  //     habitaciones,
+  //     tipoPropiedadId
+  //   } = propiedad;
 
-    //revisar que tengan contenido
-    let valido =
-      !titulo ||
-      !descripcion.length ||
-      !precio.length ||
-      !sector.length ||
-      !direccion.length ||
-      !area.length ||
-      !banios.length ||
-      !img1.length ||
-      !img2.length ||
-      !habitaciones.length ||
-      !tipoPropiedadId.length;
+  //   //revisar que tengan contenido
+  //   let valido =
+  //     !titulo ||
+  //     !descripcion.length ||
+  //     !precio.length ||
+  //     !sector.length ||
+  //     !direccion.length ||
+  //     !area.length ||
+  //     !banios.length ||
+  //     !img1.length ||
+  //     !img2.length ||
+  //     !habitaciones.length ||
+  //     !tipoPropiedadId.length;
 
-    return valido;
-  };
+  //   return valido;
+  // };
 
   const ancho = { width: "500px" };
 
@@ -227,26 +224,16 @@ function Formpropiedades(props) {
                   </div>
                 </div>
                 <div className="form-group">
-                  <label for="img_principal">Imagen principal</label>
+                  <label for="imagen">Imagen </label>
                   <input
                     type="file"
                     className="form-control"
                     placeholder="Sube la imagen principal"
-                    name="img1"
-                    id="img_principal"
+                    name="imagen"
+                    id="imagen"
                     onChange={leerArchivo}
                   />
-                  <div className="form-group">
-                    <label for="img_sec">Imagen dos</label>
-                    <input
-                      type="file"
-                      className="form-control"
-                      placeholder="Sube otra imagen"
-                      name="img2"
-                      id="img_sec"
-                      onChange={leerArchivo}
-                    />
-                  </div>
+
                   <div className="row">
                     <div className="col">
                       <label for="habitaciones">Habitaciones</label>
