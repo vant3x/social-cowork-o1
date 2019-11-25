@@ -17,6 +17,7 @@ class PropiedadesController {
       habitaciones,
       imagen
     } = req.body;
+
     const propiedad = await Propiedades.create({
       titulo,
       descripcion,
