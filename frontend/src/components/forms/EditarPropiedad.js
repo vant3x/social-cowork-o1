@@ -1,25 +1,10 @@
 import React, { Fragment, useState, useEffect } from "react";
-import Swal from "sweetalert2";
 import axiosFetch from "../../config/axiosConfig";
-
+import Swal from "sweetalert2";
 import "./form.css";
 
-function Formpropiedades(props) {
-  const [tipoPropiedades, guardarTipoPropiedades] = useState([]);
-
-  const fetchAPI = async () => {
-    const tiposPropiedadesData = await axiosFetch.get("/tipo-propiedades");
-
-    setTimeout(() => {
-      guardarTipoPropiedades(tiposPropiedadesData.data);
-    }, 300);
-  };
-
-  useEffect(() => {
-    fetchAPI();
-  }, []);
-
-  //propiedad=state
+function EditarPropiedad(props) {
+  const { id } = props.match.params;
 
   const [propiedad, guardarPropiedad] = useState({
     titulo: "",
@@ -29,30 +14,23 @@ function Formpropiedades(props) {
     direccion: "",
     area: "",
     banios: "",
-    habitaciones: "",
-    tipoPropiedadId: ""
+    imagen: "",
+    habitaciones: ""
   });
-  //Guardar imagen
+
   const [archivo, guardarArchivo] = useState("");
 
-  // leer data form
-  const actualizarState = e => {
-    guardarPropiedad({
-      // obtener una copia del state
-      ...propiedad,
-      [e.target.name]: e.target.value
-    });
-    console.log(propiedad);
-  };
-  // colocar la imagen en el state
-  const leerArchivo = e => {
-    guardarArchivo(e.target.files[0]);
-  };
+  useEffect(() => {
+    const fetchAPI = async () => {
+      const propiedadConsulta = await axiosFetch.get(`/propiedades/${id}`);
+      guardarPropiedad(propiedadConsulta.data);
+    };
 
-  const agregarPropiedadApi = async e => {
+    fetchAPI();
+  }, []);
+
+  const actualizarPropiedad = async e => {
     e.preventDefault();
-
-    // crear un formdata
     const formData = new FormData();
     formData.append("titulo", propiedad.titulo);
     formData.append("descripcion", propiedad.descripcion);
@@ -64,15 +42,18 @@ function Formpropiedades(props) {
     formData.append("habitaciones", propiedad.habitaciones);
     formData.append("imagen", archivo);
 
+    // almacenar en la BD
     try {
-      const res = await axiosFetch.post("/admin/propiedades", formData, {
+      const res = await axiosFetch.put(`/admin/propiedades/${id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data"
         }
       });
+
       if (res.status === 200) {
-        Swal.fire("Propiedad agregada", res.data.mensaje, "success");
+        Swal.fire("Propiedad Actualizado", res.data.mensaje, "success");
       }
+
       // redireccionar
       props.history.push("/PropiedadesFiltro");
     } catch (error) {
@@ -80,64 +61,69 @@ function Formpropiedades(props) {
       Swal.fire({
         type: "error",
         title: "Hubo un error",
-        text: "Vuelva a intentarlo, la propiedad no se agregó"
+        text: "Vuelva a intentarlo, la propiedad no se actualizó"
       });
     }
   };
 
-  const ancho = { width: "500px" };
+  // leer data form
+  const actualizarState = e => {
+    guardarPropiedad({
+      ...propiedad,
+      [e.target.name]: e.target.value
+    });
+  };
+  // colocar la imagen en el state
+  const leerArchivo = e => {
+    guardarArchivo(e.target.files[0]);
+  };
 
+  // extraer los valores del state
+  const {
+    titulo,
+    descripcion,
+    precio,
+    sector,
+    direccion,
+    area,
+    banios,
+    imagen,
+    habitaciones
+  } = propiedad;
+
+  const ancho = { width: "500px" };
   return (
     <Fragment>
       <div className="mx-auto" style={ancho}>
         <div className="container center-block ">
           <div className="row">
             <div className="col">
-              <form className="mt-3" onSubmit={agregarPropiedadApi}>
-                <h2>Registra tu inmueble</h2>
+              <form className="mt-3" onSubmit={actualizarPropiedad}>
+                <h2>Edita tu inmueble</h2>
                 <legend>Todos los campos son requeridos*</legend>
                 <hr />
                 <div className="form-group">
                   <label for="titulo">Título</label>
                   <input
                     type="text"
-                    required
                     className="form-control"
                     placeholder="Nombra el inmueble"
                     name="titulo"
                     id="titulo"
+                    defaultValue={titulo}
                     onChange={actualizarState}
                   />
-                </div>
-                <div className="row">
-                  <div className="col">
-                    <label for="tipo">Tipo</label>
-                    <select
-                      name="tipoPropiedadId"
-                      required
-                      id="titulo"
-                      className="custom-select mb-3"
-                      onChange={actualizarState}
-                    >
-                      {tipoPropiedades.map(tipoPropiedad => (
-                        <option value={tipoPropiedad.id} key={tipoPropiedad.id}>
-                          {" "}
-                          {tipoPropiedad.nombre}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
                 </div>
 
                 <div className="form-group">
                   <label for="precio">Precio</label>
                   <input
                     type="text"
-                    required
                     className="form-control"
                     placeholder="Indicanos el valor de alquiler del inmueble"
                     name="precio"
                     id="precio"
+                    defaultValue={precio}
                     onChange={actualizarState}
                   />
                 </div>
@@ -149,6 +135,7 @@ function Formpropiedades(props) {
                     placeholder="¿En qué sector esta ubicado?"
                     name="sector"
                     id="sector"
+                    defaultValue={sector}
                     onChange={actualizarState}
                   />
                 </div>
@@ -156,11 +143,11 @@ function Formpropiedades(props) {
                   <label for="direccion">Dirección</label>
                   <input
                     type="text"
-                    required
                     className="form-control"
                     placeholder="Dirección"
                     name="direccion"
                     id="direccion"
+                    defaultValue={direccion}
                     onChange={actualizarState}
                   />
                 </div>
@@ -168,39 +155,38 @@ function Formpropiedades(props) {
                   <label for="area">Área</label>
                   <input
                     type="text"
-                    required
                     className="form-control"
                     placeholder="Indicanos el área en metros cuadrados"
                     name="area"
                     id="area"
+                    defaultValue={area}
                     onChange={actualizarState}
                   />
                 </div>
-
                 <div className="row">
                   <div className="col">
                     <label for="banios">Baños</label>
                     <input
                       type="text"
-                      required
                       className="form-control"
                       placeholder="número de baños"
                       name="banios"
                       id="banios"
+                      defaultValue={banios}
                       onChange={actualizarState}
                     ></input>
                   </div>
                 </div>
                 <div className="form-group">
-                  <label for="imagen">Imagen </label>
-                  <input
-                    type="file"
-                    className="form-control"
-                    placeholder="Sube la imagen principal"
-                    name="imagen"
-                    id="imagen"
-                    onChange={leerArchivo}
-                  />
+                  <label> Imagen:</label>
+                  {imagen ? (
+                    <img
+                      width="200"
+                      src={`http://localhost:5000/uploads/${props.propiedad.imagen}`}
+                      alt="imagen"
+                    />
+                  ) : null}
+                  <input type="file" name="imagen" onChange={leerArchivo} />
 
                   <div className="row">
                     <div className="col">
@@ -211,6 +197,7 @@ function Formpropiedades(props) {
                         placeholder="habitaciones"
                         name="habitaciones"
                         id="habitaciones"
+                        defaultValue={habitaciones}
                         onChange={actualizarState}
                       ></input>
                     </div>
@@ -221,6 +208,7 @@ function Formpropiedades(props) {
                       name="descripcion"
                       id="descripcion"
                       className="form-control"
+                      defaultValue={descripcion}
                       onChange={actualizarState}
                     ></textarea>
                   </div>
@@ -240,7 +228,7 @@ function Formpropiedades(props) {
                   <button
                     type="submit"
                     className="btn btn-primary"
-                    value="Agregar propiedad"
+                    value="Actualizar propiedad"
                   >
                     Enviar
                   </button>
@@ -254,4 +242,4 @@ function Formpropiedades(props) {
   );
 }
 
-export default Formpropiedades;
+export default EditarPropiedad;
