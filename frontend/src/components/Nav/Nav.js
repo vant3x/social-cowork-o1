@@ -5,13 +5,28 @@ import './nav.css';
 
 
 const Nav = props => {
+
     
     const isLoggedIn = props.isLoggedIn;
 
+    const [tipoPropiedades, guardarTipoPropiedades] = useState([]);
+
+    const fetchAPI = async () => {
+      const tiposPropiedadesData = await axiosFetch.get("/tipo-propiedades");
+  
+      setTimeout(() => {
+        guardarTipoPropiedades(tiposPropiedadesData.data);
+      }, 300);
+    };
+  
+    useEffect(() => {
+      fetchAPI();
+    }, []);
+
     const [filBusqueda, guardarFilBusqueda] = useState({
         titulo: '',
-        area: '',
-        tipoPropiedadId: '',
+        areamt: '',
+        tipo_propiedad: '',
         precio1: '',
         precio2: ''
     });
@@ -119,12 +134,36 @@ const Nav = props => {
                                         </ul>
                                         
                                         <form className="form-inline  my-md-0 " onSubmit={mostrarDataFiltrada}>
+
+                                            <select
+
+                                                name="tipo_propiedad"
+                                                required
+                                                id="tipo_propiedad"
+                                                className="custom-select mb-3 form-control"
+                                                onChange={recibirCambioInput}
+                                            >
+                                                <option defaultValue="">Tipo</option>
+                                                {tipoPropiedades.map(tipoPropiedad => (
+                                                    <option value={parseInt(tipoPropiedad.id)} key={tipoPropiedad.id}>
+                                                    {tipoPropiedad.nombre}
+                                                    </option>
+                                                ))}
+                                                </select>
+
+                                                <input 
+                                                className="form-control form-control-sm"
+                                                 name="areamt" type="number" placeholder="area"
+                                                 onChange={recibirCambioInput}
+                                                 />
+                                 
                                             <input 
                                                 className="form-control form-control-sm"
                                                 name="titulo" type="text" placeholder="Buscar"
                                                  aria-label="Buscar"
                                                  onChange={recibirCambioInput}
                                                  />
+
                                              <button type="submit" className="ml-2 searchform_button search_button btn btn-primary btn-sm">Buscar</button>
 
                                         </form>

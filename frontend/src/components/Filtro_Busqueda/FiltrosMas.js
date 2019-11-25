@@ -39,14 +39,15 @@ function FiltrosMas() {
                                     Tipo
                                  </button>
                                  <div className="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                   <select>
+                                    {tipoPropiedades.map(tiPropiedad => (
 
-                             {tipoPropiedades.map(tiPropiedad => (
-
-                                        <ListaTipoPropiedad 
-                                            key={tiPropiedad.id}
-                                            tipoPropiedadProp={tiPropiedad}
-                                        />
-                                ))}
+                                                <ListaTipoPropiedad 
+                                                    key={tiPropiedad.id}
+                                                    tipoPropiedadProp={tiPropiedad}
+                                                />
+                                        ))}
+                                        </select>
                                 </div>
 
                             </div>

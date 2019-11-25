@@ -29,49 +29,34 @@ function Formpropiedades(props) {
     direccion: "",
     area: "",
     banios: "",
-    img1: "",
-    img2: "",
     habitaciones: "",
     tipoPropiedadId: ""
   });
   //Guardar imagen
   const [archivo, guardarArchivo] = useState("");
 
-  // leer data form
-  const actualizarState = e => {
-    guardarPropiedad({
-      // obtener una copia del state
-      ...propiedad,
-      [e.target.name]: e.target.value
-    });
-    console.log(propiedad);
-  };
-  // colocar la imagen en el state
-  const leerArchivo = e => {
-    guardarArchivo(e.target.files[0]);
-  };
 
   const agregarPropiedadApi = async e => {
     e.preventDefault();
 
      // // crear un formdata
-    // const formData = new FormData();
-    // formData.append("titulo", propiedad.titulo);
-    // formData.append("descripcion", propiedad.descripcion);
-    // formData.append("precio", propiedad.precio);
-    // formData.append("sector", propiedad.sector);
-    // formData.append("direccion", propiedad.direccion);
-    // formData.append("area", propiedad.area);
-    // formData.append("banios", propiedad.banios);
-    // formData.append("habitaciones", propiedad.habitaciones);
-    // formData.append("img1", archivo);
+   const formData = new FormData();
+   formData.append("titulo", propiedad.titulo);
+   formData.append("descripcion", propiedad.descripcion);
+   formData.append("precio", propiedad.precio);
+   formData.append("sector", propiedad.sector);
+   formData.append("direccion", propiedad.direccion);
+   formData.append("area", propiedad.area);
+   formData.append("banios", propiedad.banios);
+   formData.append("habitaciones", propiedad.habitaciones);
+   formData.append("img1", archivo);
     // formData.append("img2", archivo);
-
+    console.log(formData);
     try {
-      const res = await axiosFetch.post("/nueva-propiedad", propiedad, {
-        // headers: {
-        //   "Content-Type": "multipart/form-data"
-        // }
+      const res = await axiosFetch.post("/nueva-propiedad", formData, {
+         headers: {
+           "Content-Type": "multipart/form-data"
+        }
       });
       if (res.status === 200) {
         Swal.fire("Propiedad agregada", res.data.mensaje, "success");
@@ -88,37 +73,22 @@ function Formpropiedades(props) {
     }
   };
 
-  const validarPropiedad = () => {
-    const {
-      titulo,
-      descripcion,
-      precio,
-      sector,
-      direccion,
-      area,
-      banios,
-      img1,
-      img2,
-      habitaciones,
-      tipoPropiedadId
-    } = propiedad;
+    // leer data form
+    const actualizarState = e => {
+      guardarPropiedad({
+        // obtener una copia del state
+        ...propiedad,
+        [e.target.name]: e.target.value
+      });
+      console.log(propiedad);
+    };
+    // colocar la imagen en el state
+    const leerArchivo = e => {
+      guardarArchivo(e.target.files[0]);
+      console.log(archivo);
+    };
+  
 
-    //revisar que tengan contenido
-    let valido =
-      !titulo ||
-      !descripcion.length ||
-      !precio.length ||
-      !sector.length ||
-      !direccion.length ||
-      !area.length ||
-      !banios.length ||
-      !img1.length ||
-      !img2.length ||
-      !habitaciones.length ||
-      !tipoPropiedadId.length;
-
-    return valido;
-  };
 
   const ancho = { width: "500px" };
 

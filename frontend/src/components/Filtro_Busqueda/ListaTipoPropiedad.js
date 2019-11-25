@@ -2,9 +2,9 @@ import React from 'react';
 
 function ListaTipoPropiedadd(props) {
     return(
-            <button className="dropdown-item" type="button">
+            <option className="dropdown-item" type="button">
                  {props.tipoPropiedadProp.nombre}
-            </button>   
+            </option>   
     )
 }
 

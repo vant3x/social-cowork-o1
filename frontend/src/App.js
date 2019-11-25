@@ -11,6 +11,7 @@ import Formpropiedades from "./components/forms/Formpropiedades";
 import Recuperar from "./components/Recuperar";
 import Email from "./components/Email/Email";
 import Formdash from './components/forms/Formdash';
+import HistorialReservas from './components/Reservas/HistorialReservas';
 import './animated.css';
 import axiosFetch from './config/axiosConfig';
 
@@ -49,6 +50,7 @@ function App (props) {
             <Route exact path="/nueva-propiedad" component={Formpropiedades} />
             <Route exact path="/Email" componet={Email} />
             <Route exact path='/Formdash' component={Formdash} />
+            <Route exact path='/historial-reservas' component={HistorialReservas} />
           </Switch>
         </Fragment>
       </Router>
