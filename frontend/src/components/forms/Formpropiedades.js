@@ -85,38 +85,6 @@ function Formpropiedades(props) {
     }
   };
 
-  // const validarPropiedad = () => {
-  //   const {
-  //     titulo,
-  //     descripcion,
-  //     precio,
-  //     sector,
-  //     direccion,
-  //     area,
-  //     banios,
-  //     img1,
-  //     img2,
-  //     habitaciones,
-  //     tipoPropiedadId
-  //   } = propiedad;
-
-  //   //revisar que tengan contenido
-  //   let valido =
-  //     !titulo ||
-  //     !descripcion.length ||
-  //     !precio.length ||
-  //     !sector.length ||
-  //     !direccion.length ||
-  //     !area.length ||
-  //     !banios.length ||
-  //     !img1.length ||
-  //     !img2.length ||
-  //     !habitaciones.length ||
-  //     !tipoPropiedadId.length;
-
-  //   return valido;
-  // };
-
   const ancho = { width: "500px" };
 
   return (

@@ -6,9 +6,9 @@ import { withRouter } from "react-router-dom";
 function Pinfo(props) {
   const [propiedad, guardarPropiedad] = useState([]);
   const [reserva, guardarReserva] = useState({
-    fecha_in: '',
-    fecha_out: ''
-});
+    fecha_in: "",
+    fecha_out: ""
+  });
 
   const fetchAPI = async () => {
     const propiedad = await axiosFetch.get(
@@ -24,19 +24,19 @@ function Pinfo(props) {
   const Color = { color: "black" };
   const Left = { left: "0%" };
 
-const actualizarState = e => {
-  guardarReserva({
-    ...reserva,
-    [e.target.name] : e.target.value
-  });
-  console.log(reserva);
-}
+  const actualizarState = e => {
+    guardarReserva({
+      ...reserva,
+      [e.target.name]: e.target.value
+    });
+    console.log(reserva);
+  };
 
-const reservarPropiedad = e => {
-  e.preventDefault();
-  axiosFetch.post(`/propiedades/reserva/${props.match.params.id}`, reserva);
-  console.log(reserva);
-}
+  const reservarPropiedad = e => {
+    e.preventDefault();
+    axiosFetch.post(`/propiedades/reserva/${props.match.params.id}`, reserva);
+    console.log(reserva);
+  };
 
   return (
     <Fragment>
@@ -55,6 +55,16 @@ const reservarPropiedad = e => {
           <hr />
           <hr />
           <div className="col-6 mt-4">
+            <h4>Información general</h4>
+            <ul>
+              <li>Número de habitaciones: {propiedad.habitaciones}</li>
+              <li>Sector: {propiedad.sector}</li>
+              <li>Dirección: {propiedad.direccion}</li>
+              <li>Área: {propiedad.area} m2</li>
+              <li>Número de baños: {propiedad.banios} </li>
+            </ul>
+          </div>
+          <div className="col-6 mt-4">
             <h4>Servicios que incluye</h4>
             <ul>
               <li>Wifi</li>
@@ -70,40 +80,43 @@ const reservarPropiedad = e => {
                   <div className="card ">
                     <div className="card-body">
                       <form style={Color} name="" onSubmit={reservarPropiedad}>
-                        <h3 className="dark-grey-text text-center" style={Centrado}>
+                        <h3
+                          className="dark-grey-text text-center"
+                          style={Centrado}
+                        >
                           <strong style={Centrado}>Reserva ya</strong>
                         </h3>
-                            <div className="form-group row">
-                            <div className="col-6">
-                                <label for="form"> Inicio</label>
-                                <input
-                                onChange={actualizarState}
-                                type="date"
-                                id="form"
-                                data-veloute="checkin_input"
-                                id="checkin_input"
-                                className="form-control"
-                                placeholder="dd/mm/año"
-                                name="fecha_in"
-                                />
-                            </div>
-                            <div className="col-6">
-                                <label for="form"> Fin</label>
-                                <input
-                                  onChange={actualizarState}
-                                type="date"
-                                id="form"
-                                data-veloute="checkin_input"
-                                id="checkin_input"
-                                className="form-control"
-                                placeholder="dd/mm/año"
-                                name="fecha_out"
-                                />
-                            </div>
-                            </div>
+                        <div className="form-group row">
+                          <div className="col-6">
+                            <label for="form"> Inicio</label>
+                            <input
+                              onChange={actualizarState}
+                              type="date"
+                              id="form"
+                              data-veloute="checkin_input"
+                              id="checkin_input"
+                              className="form-control"
+                              placeholder="dd/mm/año"
+                              name="fecha_in"
+                            />
+                          </div>
+                          <div className="col-6">
+                            <label for="form"> Fin</label>
+                            <input
+                              onChange={actualizarState}
+                              type="date"
+                              id="form"
+                              data-veloute="checkin_input"
+                              id="checkin_input"
+                              className="form-control"
+                              placeholder="dd/mm/año"
+                              name="fecha_out"
+                            />
+                          </div>
+                        </div>
 
                         <div className="text-center">
-                          <button type="submit" className="btn btn-primary" >
+                          <button type="submit" className="btn btn-primary">
                             Reserva
                           </button>
                         </div>
