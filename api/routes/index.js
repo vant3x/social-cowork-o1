@@ -27,6 +27,7 @@ router.post('/restablecer/:token', authController.actualizarPassword);
 // propieades 
 router.post('/nueva-propiedad', 
     propiedadesController.nuevaPropiedad,
+    propiedadesController.subirArchivo,
     authController.usuarioAutenticado
 );
 router.get('/propiedades', propiedadesController.mostrarPropiedades,
@@ -36,6 +37,7 @@ router.get('/propiedades/:idPropiedad', propiedadesController.mostrarPropiedadId
 router.get('/tipo-propiedades', tipoPropiedadesController.mostrarTipoPropiedad);
 router.post('/editar-propiedad/:idPropiedad', 
     propiedadesController.editarPropiedad,
+    propiedadesController.subirArchivo,
     authController.usuarioAutenticado
 ); 
 router.post('/propiedades/filter', propiedadesController.filtrarPropiedades);
@@ -49,4 +51,13 @@ router.delete('/eliminar-propiedad/:idPropiedad',
 router.post('/propiedades/reserva/:idPropiedad', 
    // authController.usuarioAutenticado,
     adminPropiedadesController.hacerReserva);
+
+ 
+ router.get('/historial-reserva', 
+    adminPropiedadesController.historialReserva
+ );   
+    
+ router.get('/historial-reserva/:idPropiedad', 
+    adminPropiedadesController.historialReservaPropiedad
+);   
 module.exports = router;

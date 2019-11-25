@@ -11,7 +11,7 @@ const configMulter = {
         destination: (req, file, cb) => {
             cb(null, __dirname+'../../uploads/');
         },
-        filename: (req, file, cb) => {x
+        filename: (req, file, cb) => {
             const extension = file.mimetype.split('/')[1];
             cb(null, `${shortid.generate()}.${extension}`);
         }
@@ -21,12 +21,11 @@ const configMulter = {
             cb(null, true);
         } else {
             cb(new Error('Formato No válido'))
-        }   
+        }
     },
  }
-
  // pasar la configuracion y el campo
- const upload = multer(configMulter).single                                                                                                                                                      ('imagen');
+ const upload = multer(configMulter).single('img1');
  
  // sube un archivo
  exports.subirArchivo = (req, res, next) => {
@@ -44,7 +43,11 @@ exports.nuevaPropiedad = async (req, res, next) => {
     const { titulo, descripcion, precio, sector, direccion, area, banios, habitaciones, cod_referencia, tipoPropiedadId } = req.body;
     const estadoDisponible = 0;
     
-    const img1 = "NULL";
+   // const img1 = "NULL";
+    let img1;
+   if (req.file) {
+        img1 = req.file.filename;
+   }
     const img2 = "NULL";
 
    const resultado = await Propiedades.create({

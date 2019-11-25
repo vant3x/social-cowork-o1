@@ -12,10 +12,14 @@ const adminPropiedades = db.define('admin_propiedades', {
     fecha_in: {
         type: Sequelize.DATE
     },
+    
     fecha_out: Sequelize.DATE,
     valor: Sequelize.DOUBLE(8,3),
     
-}, {  underscored: true
+    fecha_reserva: {
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW
+    },}, {  underscored: true
 });
     
 adminPropiedades.belongsTo(Cliente, {as:'cliente'});

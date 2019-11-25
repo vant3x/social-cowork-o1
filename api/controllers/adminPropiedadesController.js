@@ -27,11 +27,13 @@ exports.hacerReserva = async (req, res, next) => {
     console.log(precio);
    
     const valor = diasTotales * precio;
+    const fecha_reserva = Date.now();
 
     const reserva = await adminPropiedades.create({
         fecha_in,
         fecha_out,
         valor,
+        fecha_reserva,
         cliente_id_usuario,
         propiedadId
     })
@@ -43,4 +45,19 @@ exports.hacerReserva = async (req, res, next) => {
     if(!reserva) {
         next(); 
     }
+}
+
+exports.historialReserva = async (req, res, next) => {
+    const historial = await adminPropiedades.findAll();
+    console.log(historial);
+    res.json(historial);
+}
+
+exports.historialReservaPropiedad = async (req, res) => {
+    const historial = await adminPropiedades.findAll({
+        where: {
+            id: req.params.idPropiedad
+        }
+    });
+    console.log(historial);
 }
