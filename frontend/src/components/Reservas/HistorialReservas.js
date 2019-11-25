@@ -1,6 +1,8 @@
 import React, { useState, useEffect, Fragment } from "react";
 import axiosFetch from "../../config/axiosConfig";
 
+import { Link } from 'react-router-dom';
+
 const HistorialReserva = props => {
   const [reservas, guardarReservas] = useState([]);
 
@@ -24,9 +26,9 @@ const HistorialReserva = props => {
             <thead className="thead-dark">
               <tr>
                 <th scope="col">#ID</th>
-                <th scope="col">Propiedad</th>
                 <th scope="col">Valor</th>
                 <th scope="col">Fecha Reserva</th>
+                <th>Acciones</th>
               </tr>
             </thead>
             <tbody>
@@ -34,9 +36,9 @@ const HistorialReserva = props => {
                     reservas.map(reserva => (
                     <tr key={reserva.id}>
                         <th scope="row"> {reserva.id} </th>
-                        <td>Propiedad xd</td>
                     <td>${reserva.valor.toFixed(3)}</td>
                         <td>{ new Date(reserva.fecha_reserva) .toISOString().slice(0,10)}</td>
+                        <td><Link to={`/reserva/${reserva.id}`} className="btn btn-primary">Más información</Link></td>
                       </tr>
                     ))
                 }

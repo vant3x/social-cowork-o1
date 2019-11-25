@@ -54,10 +54,11 @@ exports.historialReserva = async (req, res, next) => {
 }
 
 exports.historialReservaPropiedad = async (req, res) => {
-    const historial = await adminPropiedades.findAll({
+    const historial = await adminPropiedades.findOne({
         where: {
-            id: req.params.idPropiedad
+            id: req.params.idReserva
         }
     });
     console.log(historial);
+    res.json(historial);
 }

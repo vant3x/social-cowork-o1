@@ -35,29 +35,23 @@ function Formpropiedades(props) {
   //Guardar imagen
   const [archivo, guardarArchivo] = useState("");
 
+  // leer data form
+  const actualizarState = e => {
+    guardarPropiedad({
+      // obtener una copia del state
+      ...propiedad,
+      [e.target.name]: e.target.value
+    });
+    console.log(propiedad);
+  };
+  // colocar la imagen en el state
+  const leerArchivo = e => {
+    guardarArchivo(e.target.files[0]);
+  };
 
   const agregarPropiedadApi = async e => {
     e.preventDefault();
 
-<<<<<<< HEAD
-     // // crear un formdata
-   const formData = new FormData();
-   formData.append("titulo", propiedad.titulo);
-   formData.append("descripcion", propiedad.descripcion);
-   formData.append("precio", propiedad.precio);
-   formData.append("sector", propiedad.sector);
-   formData.append("direccion", propiedad.direccion);
-   formData.append("area", propiedad.area);
-   formData.append("banios", propiedad.banios);
-   formData.append("habitaciones", propiedad.habitaciones);
-   formData.append("img1", archivo);
-    // formData.append("img2", archivo);
-    console.log(formData);
-    try {
-      const res = await axiosFetch.post("/nueva-propiedad", formData, {
-         headers: {
-           "Content-Type": "multipart/form-data"
-=======
     // crear un formdata
     const formData = new FormData();
     formData.append("titulo", propiedad.titulo);
@@ -74,7 +68,6 @@ function Formpropiedades(props) {
       const res = await axiosFetch.post("/admin/propiedades", formData, {
         headers: {
           "Content-Type": "multipart/form-data"
->>>>>>> b9497be3f1fbff2d9224d37689a5b42287a7f768
         }
       });
       if (res.status === 200) {
@@ -92,26 +85,6 @@ function Formpropiedades(props) {
     }
   };
 
-<<<<<<< HEAD
-    // leer data form
-    const actualizarState = e => {
-      guardarPropiedad({
-        // obtener una copia del state
-        ...propiedad,
-        [e.target.name]: e.target.value
-      });
-      console.log(propiedad);
-    };
-    // colocar la imagen en el state
-    const leerArchivo = e => {
-      guardarArchivo(e.target.files[0]);
-      console.log(archivo);
-    };
-  
-
-
-=======
->>>>>>> b9497be3f1fbff2d9224d37689a5b42287a7f768
   const ancho = { width: "500px" };
 
   return (

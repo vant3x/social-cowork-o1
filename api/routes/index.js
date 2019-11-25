@@ -49,7 +49,7 @@ router.post(
     adminPropiedadesController.historialReserva
  );   
     
- router.get('/historial-reserva/:idPropiedad', 
+ router.get('/historial-reserva/:idReserva', 
     adminPropiedadesController.historialReservaPropiedad
 );   
 module.exports = router;

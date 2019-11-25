@@ -23,27 +23,30 @@ const Nav = props => {
       fetchAPI();
     }, []);
 
-    const [filBusqueda, guardarFilBusqueda] = useState({
+    /*const [filBusqueda, guardarFilBusqueda] = useState({
         titulo: '',
         areamt: '',
         tipo_propiedad: '',
         precio1: '',
         precio2: ''
-    });
+    });*/
 
     const recibirCambioInput = async (e) => {
         console.log(e.target.value);
-        guardarFilBusqueda(
+        props.guardarFilBusqueda(
             {
-                ...filBusqueda,
+                ...props.filBusqueda,
                 [e.target.name] : e.target.value
             }
         );
-        console.log(filBusqueda)
-        console.log(filBusqueda.titulo)
+        console.log(props.filBusqueda)
+        console.log(props.filBusqueda.titulo)
+    
     }
 
-    const mostrarDataFiltrada = async (e) => {
+   
+
+   /* const mostrarDataFiltrada = async (e) => {
         e.preventDefault();
        const data = await axiosFetch.post('/propiedades/filter', filBusqueda)
             .then(res => {
@@ -53,7 +56,7 @@ const Nav = props => {
 
             console.log(data)
     }
-
+*/
     const renderLoginSignup = () => {
         if (isLoggedIn !== true) {
             return(
@@ -133,7 +136,7 @@ const Nav = props => {
                                             </li>
                                         </ul>
                                         
-                                        <form className="form-inline  my-md-0 " onSubmit={mostrarDataFiltrada}>
+                                        <form className="form-inline  my-md-0 " onSubmit={props.mostrarDataFiltradaFunc}>
 
                                             <select
 

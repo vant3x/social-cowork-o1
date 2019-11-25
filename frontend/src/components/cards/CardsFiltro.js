@@ -3,7 +3,7 @@ import "../cards/card.css";
 import CardFiltroDetalle from "./CardFiltroDetalle";
 import axiosFetch from "../../config/axiosConfig";
 
-function CardsFiltro() {
+function CardsFiltro(props) {
   const [propiedades, guardarPropiedades] = useState([]);
 
   const fetchAPI = async () => {
@@ -14,9 +14,17 @@ function CardsFiltro() {
     }, 300);
   };
 
-  useEffect(() => {
+ useEffect(() => {
     fetchAPI();
-  }, [propiedades]);
+  }, []);
+
+  const actualizarResultados = () => {
+    guardarPropiedades(props.filBusqueda);
+  }
+
+  useEffect(() => {
+    actualizarResultados()
+  }, [props.filBusqueda]);
 
   return (
     <Fragment>

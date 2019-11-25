@@ -12,7 +12,7 @@ function PropiedadesFiltro(props) {
         <Fragment>
             <FiltroB />
             <FiltrosMas />
-            <CardsFiltros />
+            <CardsFiltros filBusqueda={props.filBusqueda} />
         </Fragment>
 
     )
