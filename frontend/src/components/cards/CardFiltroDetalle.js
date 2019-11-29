@@ -6,7 +6,7 @@ function CardFiltroDetalle(props) {
     verticalAlign: "inherit"
   };
   return (
-    <div className="col-md-4">
+    <div className="col-md-4  animated fadeIn">
       <div className="card mb-4 shadow-sm">
         <img
           src={`http://localhost:5000/uploads/${props.propiedad.imagen}`}

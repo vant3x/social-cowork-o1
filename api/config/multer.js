@@ -9,8 +9,9 @@ const storage = multer.diskStorage({
   filename: async function(req, file, cb) {
     //Esté nombre es el que se guarda en la base de datos
     let filename = `${file.fieldname}-${Date.now()}`;
-    req.body.imagen = filename;
-    cb(null, filename);
+    const extension = file.mimetype.split('/')[1];
+    req.body.imagen = `${filename}.${extension}`;
+    cb(null, `${filename}.${extension}`);
   }
 });
 const upload = multer({ storage });

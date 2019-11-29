@@ -33,8 +33,14 @@ router.get(
   "/propiedades/:idPropiedad",
   propiedadesController.mostrarPropiedadId
 );
+
+router.delete('/eliminar-propiedad/:idPropiedad', 
+    propiedadesController.eliminarPropiedad
+);
 //tipo propiedad
 router.get("/tipo-propiedades", tipoPropiedadesController.mostrarTipoPropiedad);
+
+
 
 router.post("/propiedades/filter", propiedadesController.filtrarPropiedades);
 //router.get('/propiedades/filter/:query', propiedadesController.filtrarPropiedades);
@@ -52,4 +58,8 @@ router.post(
  router.get('/historial-reserva/:idReserva', 
     adminPropiedadesController.historialReservaPropiedad
 );   
+
+
+router.get('/reservas/ganancias', adminPropiedadesController.historialReservaGananciasTotales);
+
 module.exports = router;

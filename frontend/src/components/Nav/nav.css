@@ -8,6 +8,10 @@ margin: 0 !important;
 position: absolute !important;
 }
 
+.input-area {
+  max-width:100px;
+}
+
 .nav-link{
     justify-content: end;
      color:black;

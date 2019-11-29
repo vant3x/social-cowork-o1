@@ -21,8 +21,8 @@ const adminPropiedades = db.define('admin_propiedades', {
         defaultValue: Sequelize.NOW
     },}, {  underscored: true
 });
-    
+
+adminPropiedades.belongsTo(Propiedades, {foreignKey: 'id_propiedades', targetKey: 'id_propiedades'});
 adminPropiedades.belongsTo(Cliente, {as:'cliente'});
-adminPropiedades.belongsTo(Propiedades);
 
 module.exports = adminPropiedades;

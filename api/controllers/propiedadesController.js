@@ -78,3 +78,21 @@ exports.filtrarPropiedades = async (req, res, next) => {
     });
   }
 };
+
+
+exports.eliminarPropiedad = async (req, res, next) => {
+
+  const {idPropiedad} = req.params;
+
+ const resultado = await Propiedades.destroy( { 
+      where: {id_propiedades: idPropiedad }
+  })
+  .then(() => {
+      console.log('Registro eliminado con exito');
+      res.send('Hola we, se elimino');
+    }).catch(error => console.log(error));
+  
+  if(!resultado) {
+      next(); 
+  }
+}

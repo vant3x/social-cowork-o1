@@ -1,5 +1,5 @@
 import React, { Fragment, createContext, useState, useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, withRouter } from "react-router-dom";
 import Nav from "./components/Nav/Nav";
 import Home from "./components/Home";
 import Registro from "./components/Registro";
@@ -15,6 +15,9 @@ import Email from "./components/Email/Email";
 import Formdash from './components/forms/Formdash';
 import HistorialReservas from './components/Reservas/HistorialReservas';
 import ReservaResumen from './components/Reservas/ReservaResumen';
+import Dashboard from './components/Dashboard/DashboardOP';
+import DashboardPropiedades from './components/Dashboard/GestionarPropiedades';
+import DashboardHome from './components/Dashboard/DashboardHome';
 import './animated.css';
 import axiosFetch from './config/axiosConfig';
 
@@ -23,7 +26,6 @@ const NavContext = createContext({
   propiedades: {}
 });
 
-const DefaultLayout = React.lazy(() => import('./Dashboard/containers/DefaultLayout'));
 
 
 function App(props) {
@@ -75,16 +77,19 @@ const [resultadoPropiedades, guardarResultadoPropiedades] = useState([]);
             <Route exact path="/Recuperar" component={Recuperar} />
             <Route exact path="/Pago" component={Pago} />
            {/* <Route exact path="/PropiedadesFiltro" component={PropiedadesFiltro} /> */}
-            <Route exact path="/PropiedadesFiltro" render={() => <PropiedadesFiltro filBusqueda={resultadoPropiedades} />} />
+            <Route exact path="/explorar" render={() => <PropiedadesFiltro filBusqueda={resultadoPropiedades} />} />
             <Route exact path="/propiedad/:id" component={PropiedadesInfo} />
             <Route exact path="/nueva-propiedad" component={Formpropiedades} />
             <Route exact path="/propiedades/eliminar/:id" componet={Propiedad} />
-            <Route exact path='/editar-propiedad' component={EditarPropiedad} />
+            <Route exact path='/editar-propiedad/:id' component={EditarPropiedad} />
 
             <Route exact path="/Email" componet={Email} />
             <Route exact path='/Formdash' component={Formdash} />
             <Route exact path='/historial-reservas' component={HistorialReservas} />
             <Route exact path='/reserva/:idReserva' component={ReservaResumen} />
+
+            <Route exact path="/dashboard/admin" component={DashboardHome} />
+            <Route exact path="/dashboard/propiedades" component={DashboardPropiedades} />
           </Switch>
         </Fragment>
       </Router>
@@ -92,4 +97,4 @@ const [resultadoPropiedades, guardarResultadoPropiedades] = useState([]);
   
 }
 
-export default App;
+export default (App);

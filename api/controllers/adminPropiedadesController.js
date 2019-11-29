@@ -25,6 +25,7 @@ exports.hacerReserva = async (req, res, next) => {
     const precio = propiedad.precio;
     const propiedadId = propiedad.id_propiedades;
     console.log(precio);
+    console.log('El id de la propiedad es: ' + propiedadId)
    
     const valor = diasTotales * precio;
     const fecha_reserva = Date.now();
@@ -35,7 +36,7 @@ exports.hacerReserva = async (req, res, next) => {
         valor,
         fecha_reserva,
         cliente_id_usuario,
-        propiedadId
+        idPropiedad
     })
     .then(() => {
         console.log('Reserva con exito');
@@ -61,4 +62,16 @@ exports.historialReservaPropiedad = async (req, res) => {
     });
     console.log(historial);
     res.json(historial);
+}
+
+exports.historialReservaGananciasTotales = async (req, res) => {
+    const historial = await adminPropiedades.findAll();
+    let ganancias = 0;
+
+    for (i = 0; i < historial.length; i++) {
+        ganancias += historial[i].valor;
+    }
+
+    res.json({ganancias});
+
 }

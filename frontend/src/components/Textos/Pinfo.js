@@ -2,6 +2,7 @@ import React, { Fragment, useState, useEffect } from "react";
 
 import axiosFetch from "../../config/axiosConfig";
 import { withRouter } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function Pinfo(props) {
   const [propiedad, guardarPropiedad] = useState([]);
@@ -34,7 +35,10 @@ function Pinfo(props) {
 
   const reservarPropiedad = e => {
     e.preventDefault();
-    axiosFetch.post(`/propiedades/reserva/${props.match.params.id}`, reserva);
+    const res = axiosFetch.post(`/propiedades/reserva/${props.match.params.id}`, reserva);
+    if (res.status === 200) {
+      Swal.fire("Reserva con éxito", res.data.mensaje, "success");
+    }
     console.log(reserva);
   };
 
@@ -115,9 +119,9 @@ function Pinfo(props) {
                           </div>
                         </div>
 
-                        <div className="text-center">
+                        <div className="text-center mb-4">
                           <button type="submit" className="btn btn-primary">
-                            Reserva
+                            Reservar
                           </button>
                         </div>
                       </form>
